@@ -58,7 +58,7 @@ namespace ORM2.Repository
                     }
                 }
                 else
-                    throw new System.Exception();
+                    throw new System.Exception("Missing Argument");
 
             }
             else throw new Exception("The number of hours must be in between 0 and 8 per day.");
@@ -69,6 +69,8 @@ namespace ORM2.Repository
 
         public string Workload(string project)
         {
+
+
             var proj = _dbContext.projects.FirstOrDefault(x => x.ProjectName.Equals(project));
 
             if (proj != null)
