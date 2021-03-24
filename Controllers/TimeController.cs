@@ -23,7 +23,7 @@ namespace ORM2.Controllers
 
         [Route("LogHours")]
         [HttpPost]
-        public async Task<IActionResult> LogHours(string name,
+        public IActionResult LogHours(string name,
                                       DateTime dateTime,
                                       float price,
                                       string projectName,
@@ -36,14 +36,14 @@ namespace ORM2.Controllers
         }
         [Route("Workload")]
         [HttpGet]
-        public async Task<IActionResult> Workload(string project)
+        public IActionResult Workload(string project)
         {
             var result = _timeTracker.Workload(project);
             return Ok(result);
         }
         [Route("cost")]
         [HttpGet]
-        public async Task<IActionResult> CostperMonth(string customerName, DateTime date)
+        public IActionResult CostperMonth(string customerName, DateTime date)
         {
             var result = _timeTracker.CostPerMonth(customerName, date);
             return Ok(result);
