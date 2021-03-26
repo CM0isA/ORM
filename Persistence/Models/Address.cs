@@ -5,15 +5,15 @@ namespace Persistence.Models
     public class Address
     {
         [Key]
-        public int addressID { get; set; }
+        public int AddressID { get; set; }
         [Required]
-        public string address { get; set; }
+        public string Street { get; set; }
         [Required]
-        public string zipcode { get; set; }
+        public string Zipcode { get; set; }
         [Required]
-        public string state { get; set; }
+        public string State { get; set; }
         [Required]
-        public string county { get; set; }
+        public string County { get; set; }
         [Required]
         public string City { get; set; }
     }

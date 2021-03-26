@@ -6,7 +6,7 @@ namespace Persistence.Repository
 {
     public interface ITimeTracker
     {
-        public void LogHours(string name, DateTime dateTime, float price, string projectName, int hours);
+        public string LogHours(string name, DateTime dateTime, float price, string projectName, int hours);
 
         public string Workload(string project);
 

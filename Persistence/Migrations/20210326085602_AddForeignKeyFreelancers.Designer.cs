@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence.Models;
 
-namespace ORM2.Migrations
+namespace Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210324155003_CreateAddressTable")]
-    partial class CreateAddressTable
+    [Migration("20210326085602_AddForeignKeyFreelancers")]
+    partial class AddForeignKeyFreelancers
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,7 +23,7 @@ namespace ORM2.Migrations
 
             modelBuilder.Entity("Persistence.Models.Address", b =>
                 {
-                    b.Property<int>("addressID")
+                    b.Property<int>("AddressID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -32,106 +32,106 @@ namespace ORM2.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("address")
+                    b.Property<string>("County")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("county")
+                    b.Property<string>("State")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("state")
+                    b.Property<string>("Street")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("zipcode")
+                    b.Property<string>("Zipcode")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("addressID");
+                    b.HasKey("AddressID");
 
-                    b.ToTable("Address");
+                    b.ToTable("Addresses");
                 });
 
             modelBuilder.Entity("Persistence.Models.Customer", b =>
                 {
-                    b.Property<int>("customerID")
+                    b.Property<int>("CustomerID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("addressID")
+                    b.Property<int?>("AddressID")
                         .HasColumnType("int");
 
-                    b.Property<string>("customer")
+                    b.Property<string>("CustomerName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("customerID");
+                    b.HasKey("CustomerID");
 
-                    b.HasIndex("addressID");
+                    b.HasIndex("AddressID");
 
                     b.ToTable("Customers");
                 });
 
             modelBuilder.Entity("Persistence.Models.Freelancer", b =>
                 {
-                    b.Property<int>("freelancerID")
+                    b.Property<int>("FreelancerID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("addressID")
+                    b.Property<int?>("AddressID")
                         .HasColumnType("int");
 
-                    b.Property<string>("freelancer")
+                    b.Property<string>("FreelancerName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("freelancerID");
+                    b.HasKey("FreelancerID");
 
-                    b.HasIndex("addressID");
+                    b.HasIndex("AddressID");
 
-                    b.ToTable("freelancers");
+                    b.ToTable("Freelancers");
                 });
 
             modelBuilder.Entity("Persistence.Models.Price", b =>
                 {
-                    b.Property<int>("priceID")
+                    b.Property<int>("PriceID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<float>("price")
+                    b.Property<float>("Value")
                         .HasColumnType("real");
 
-                    b.HasKey("priceID");
+                    b.HasKey("PriceID");
 
                     b.ToTable("Prices");
                 });
 
             modelBuilder.Entity("Persistence.Models.Project", b =>
                 {
-                    b.Property<int>("projectID")
+                    b.Property<int>("ProjectID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("CustomerID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Estimation")
+                        .HasColumnType("int");
 
                     b.Property<string>("ProjectName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("customerID")
-                        .HasColumnType("int");
+                    b.HasKey("ProjectID");
 
-                    b.Property<int>("estimation")
-                        .HasColumnType("int");
+                    b.HasIndex("CustomerID");
 
-                    b.HasKey("projectID");
-
-                    b.HasIndex("customerID");
-
-                    b.ToTable("projects");
+                    b.ToTable("Projects");
                 });
 
             modelBuilder.Entity("Persistence.Models.Time", b =>
@@ -141,78 +141,78 @@ namespace ORM2.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("freelancerID")
+                    b.Property<int?>("FreelancersFreelancerID")
                         .HasColumnType("int");
 
-                    b.Property<int>("hours")
+                    b.Property<int>("Hours")
                         .HasColumnType("int");
 
-                    b.Property<int?>("priceID")
+                    b.Property<int?>("PriceID")
                         .HasColumnType("int");
 
-                    b.Property<int?>("projectID")
+                    b.Property<int?>("ProjectID")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("workday")
+                    b.Property<DateTime>("Workday")
                         .HasColumnType("datetime2");
 
                     b.HasKey("LogID");
 
-                    b.HasIndex("freelancerID");
+                    b.HasIndex("FreelancersFreelancerID");
 
-                    b.HasIndex("priceID");
+                    b.HasIndex("PriceID");
 
-                    b.HasIndex("projectID");
+                    b.HasIndex("ProjectID");
 
-                    b.ToTable("times");
+                    b.ToTable("Times");
                 });
 
             modelBuilder.Entity("Persistence.Models.Customer", b =>
                 {
-                    b.HasOne("Persistence.Models.Address", "address")
+                    b.HasOne("Persistence.Models.Address", "Address")
                         .WithMany()
-                        .HasForeignKey("addressID");
+                        .HasForeignKey("AddressID");
 
-                    b.Navigation("address");
+                    b.Navigation("Address");
                 });
 
             modelBuilder.Entity("Persistence.Models.Freelancer", b =>
                 {
-                    b.HasOne("Persistence.Models.Address", "address")
+                    b.HasOne("Persistence.Models.Address", "Address")
                         .WithMany()
-                        .HasForeignKey("addressID");
+                        .HasForeignKey("AddressID");
 
-                    b.Navigation("address");
+                    b.Navigation("Address");
                 });
 
             modelBuilder.Entity("Persistence.Models.Project", b =>
                 {
-                    b.HasOne("Persistence.Models.Customer", "customer")
+                    b.HasOne("Persistence.Models.Customer", "Customer")
                         .WithMany()
-                        .HasForeignKey("customerID");
+                        .HasForeignKey("CustomerID");
 
-                    b.Navigation("customer");
+                    b.Navigation("Customer");
                 });
 
             modelBuilder.Entity("Persistence.Models.Time", b =>
                 {
-                    b.HasOne("Persistence.Models.Freelancer", "FreelancerID")
+                    b.HasOne("Persistence.Models.Freelancer", "Freelancers")
                         .WithMany()
-                        .HasForeignKey("freelancerID");
+                        .HasForeignKey("FreelancersFreelancerID");
 
-                    b.HasOne("Persistence.Models.Price", "price")
+                    b.HasOne("Persistence.Models.Price", "Price")
                         .WithMany()
-                        .HasForeignKey("priceID");
+                        .HasForeignKey("PriceID");
 
-                    b.HasOne("Persistence.Models.Project", "project")
+                    b.HasOne("Persistence.Models.Project", "Project")
                         .WithMany()
-                        .HasForeignKey("projectID");
+                        .HasForeignKey("ProjectID");
 
-                    b.Navigation("FreelancerID");
+                    b.Navigation("Freelancers");
 
-                    b.Navigation("price");
+                    b.Navigation("Price");
 
-                    b.Navigation("project");
+                    b.Navigation("Project");
                 });
 #pragma warning restore 612, 618
         }

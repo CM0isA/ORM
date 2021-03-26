@@ -26,9 +26,16 @@ namespace ORM2.Controllers
                                       string projectName,
                                       int hours)
         {
-
-            _timeTracker.LogHours(name, dateTime, price, projectName, hours);
-            return Ok();
+            string result;
+            try
+            {
+                result = _timeTracker.LogHours(name, dateTime, price, projectName, hours);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return Ok(result);
 
         }
 
@@ -36,7 +43,19 @@ namespace ORM2.Controllers
         [HttpGet]
         public IActionResult Workload(string project)
         {
-            var result = _timeTracker.Workload(project);
+            string result;
+            if (project == null)
+                return BadRequest();
+            else
+                try
+                {
+                    result = _timeTracker.Workload(project);
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+            
             return Ok(result);
         }
 
@@ -44,18 +63,20 @@ namespace ORM2.Controllers
         [HttpGet]
         public IActionResult CostperMonth(string customerName, DateTime date)
         {
-            float result = 0;
-            result = _timeTracker.CostPerMonth(customerName, date);
-            //try
-            //{
-                
-            //}
-            //catch (Exception e)
-            //{
-                
-                
-            //}
-            
+            float result;
+            if (customerName == null)
+                return BadRequest();
+            if (date == null)
+                return BadRequest();
+            try
+            {
+                result = _timeTracker.CostPerMonth(customerName, date);
+            }
+            catch (Exception)
+            {
+                throw;
+
+            }
             return Ok(result);
         }
 

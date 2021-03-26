@@ -5,13 +5,13 @@ namespace Persistence.Models
     public class Project
     {
         [Key]
-        public int projectID { get; set; }
+        public int ProjectID { get; set; }
         [Required]
         public string ProjectName { get; set; }
         [Required]
-        public int estimation { get; set; }
+        public int Estimation { get; set; }
         [Required]
-        public Customer customer { get; set; }
+        public Customer Customer { get; set; }
 
         
     }

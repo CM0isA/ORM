@@ -5,10 +5,9 @@ namespace Persistence.Models
     public class Freelancer
     {
         [Key]
-        public int freelancerID { get; set; }
+        public int FreelancerID { get; set; }
         [Required]
-        public string freelancer { get; set; }
-        [Required]
-        public Address address { get; set; }
+        public string FreelancerName { get; set; }
+        public Address Address { get; set; }
     }
 }

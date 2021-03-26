@@ -7,15 +7,16 @@ namespace Persistence.Models
         [Key]
         public int LogID { get; set; }
         [Required]
-        public Freelancer FreelancerID { get; set; }
+        public Freelancer Freelancers { get; set; }
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-mm-dd}", ApplyFormatInEditMode = true)]
-        public System.DateTime workday { get; set; }
+        [DisplayFormat(DataFormatString = "{0:dd-mm-yyyy}", ApplyFormatInEditMode = true)]
+        public System.DateTime Workday { get; set; }
         [Required]
-        public int hours { get; set; }
+        public int Hours { get; set; }
         [Required]
-        public Project project { get; set; }
+        public Project Project { get; set; }
         [Required]
-        public Price price { get; set; }
+        public Price Price { get; set; }
+
     }
 }

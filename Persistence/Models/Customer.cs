@@ -5,11 +5,11 @@ namespace Persistence.Models
     public class Customer
     {
         [Key]
-        public int customerID { get; set; }
+        public int CustomerID { get; set; }
         [Required]
-        public string customer { get; set; }
+        public string CustomerName { get; set; }
         [Required]
-        public Address address { get; set; }
+        public Address Address { get; set; }
 
     }
 }

@@ -5,8 +5,8 @@ namespace Persistence.Models
     public class Price
     {
         [Key]
-        public int priceID { get; set; }
+        public int PriceID { get; set; }
         [Required]
-        public float price { get; set; }
+        public float Value { get; set; }
     }
 }
